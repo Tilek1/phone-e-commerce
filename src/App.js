@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+import './App.css'
+import Navbar from './components/Navbar'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import PhoneContextProvider from './context/phoneContext'
+import ProductList from './components/ProductList'
+import Cart from './components/Cart'
+import TotalContextProvider from './context/totalContext'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+  render() {
+      
+  
+
+    return (
+      <div className="App">
+      	<Router>
+      	<Navbar />
+      	<PhoneContextProvider>
+        <TotalContextProvider>
+        <Switch>
+            <Route exact path="/" component={ProductList} />
+      		  <Route path='/cart' component={Cart} />
+        </Switch>
+        </TotalContextProvider>
+        </PhoneContextProvider>
+      	</Router>
+      </div>
+    )
+  }
 }
 
-export default App;
+export default App
